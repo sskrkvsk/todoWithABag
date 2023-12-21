@@ -2,18 +2,83 @@
 
 <div class="container">
   <!-- Do now -->
-  <section>
+  <section class="donow">
     <p class="alert">added</p>
     <h3>DO THIS</h3>
-    <div class="form-control">
-      <input type="text" id="todo" placeholder="do it" />
-      <button type="submit" class="submit-btn">Add</button>
+    <form class="add-form" action="add" method="post">
+      <input
+        name="newItem"
+        type="text"
+        class="input"
+        placeholder="Do what?"
+        autocomplete="off"
+        autofocus="true"
+      />
+      <button type="submit" class="add-btn" name="list" value>+</button>
+    </form>
+
+    <div class="items-container">
+      <form action="/delete" class="items-form" method="post"></form>
+      <div class="item">
+        <p class="title">
+          test
+          1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa23
+        </p>
+        <button class="edit-btn">
+          <span class="material-symbols-outlined"> edit </span>
+        </button>
+        <button class="delete-btn">
+          <span class="material-symbols-outlined"> done </span>
+        </button>
+      </div>
+
+      <p class="title">test 123</p>
     </div>
   </section>
 
+  <button class="open-bag">a</button>
+
   <!--  Bag -->
-  <section>a</section>
+  <section class="bag" id="bag-section">
+    <p class="alert">added</p>
+    <h3>YOUR BAG</h3>
+    <form class="add-form" action="add" method="post">
+      <input
+        name="newItem"
+        type="text"
+        class="input"
+        placeholder="Save for later"
+        autocomplete="off"
+        autofocus="true"
+      />
+      <button type="submit" class="add-btn" name="list" value>+</button>
+    </form>
+
+    <div class="items-container">
+      <form action="/delete" class="items-form" method="post"></form>
+      <div class="item">
+        <p class="title">
+          test
+          1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa23
+        </p>
+        <button class="edit-btn">
+          <span class="material-symbols-outlined"> edit </span>
+        </button>
+        <button class="delete-btn">
+          <span class="material-symbols-outlined"> done </span>
+        </button>
+      </div>
+
+      <p class="title">test 123</p>
+    </div>
+  </section>
 </div>
 
-<script></script>
+<script>
+  document.querySelector(".open-bag").addEventListener("click", () => {
+    // This function will be executed when the button is clicked
+    document.querySelector("#bag-section").classList.toggle("bag");
+    document.querySelector(".open-bag").classList.toggle("opened-bag");
+  });
+</script>
 <%- include('partials/footer.ejs'); -%>

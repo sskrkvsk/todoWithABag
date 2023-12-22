@@ -5,6 +5,7 @@ import 'dotenv/config';
 
 const app = express();
 const port = process.env.PORT || 3000;
+let isSectionCollapsed = true;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -36,7 +37,8 @@ app.get("/", async (req, res) => {
 
     res.render("index.ejs", {
       listItems: items,
-      bagItems: items2
+      bagItems: items2,
+      isSectionCollapsed 
     });
   } catch (error) {
     console.error("Error retrieving items from the database:", error);
@@ -46,16 +48,33 @@ app.get("/", async (req, res) => {
 
 // ADD
 app.post("/add", async (req, res) => {
-//   try {
-//     const item = req.body.newItem;
-//     const result = await db.query("INSERT INTO items (title) VALUES ($1) RETURNING *", [item]);
-//     // console.log(result.rows);
+  try {
+    const item = req.body.newItem;
+    const item2 = req.body.newBagItem;
 
-//     res.redirect("/");
-//   } catch (error) {
-//     console.error("Error adding item to the database:", error);
-//     res.status(500).send("Internal Server Error");
-//   }
+    if (item) {
+      const result = await db.query("INSERT INTO donow (title) VALUES ($1) RETURNING *", [item]);
+    } else {
+      if (item2) {
+        const bagResult = await db.query("INSERT INTO bag (title) VALUES ($1) RETURNING *", [item2]);
+      }
+    }
+    
+    res.redirect("/");
+  } catch (error) {
+    console.error("Error adding item to the database:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+app.post("/toggleState", (req, res) => {
+  try {
+    isSectionCollapsed = !isSectionCollapsed;
+    res.status(200).end();
+  } catch (error) {
+    console.error("Error toggling section state:", error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 //EDIT
@@ -86,6 +105,7 @@ app.post("/delete", async (req, res) => {
 //     res.status(500).send("Internal Server Error");
 //   }
 });
+
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

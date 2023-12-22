@@ -68,7 +68,7 @@
     <!-- Do later FORM ////////////////////////////////////////////////////////////////////////////// -->
     <form class="add-form" action="add" method="post">
       <input
-        name="newItem"
+        name="newBagItem"
         type="text"
         class="input"
         placeholder="Save for later"
@@ -137,9 +137,17 @@
 
 <script>
   // BAG TOGGLE
+  // document.querySelector(".open-bag").addEventListener("click", () => {
+  //   document.querySelector("#bag-section").classList.toggle("bag");
+  //   document.querySelector(".open-bag").classList.toggle("opened-bag");
+  // });
+
   document.querySelector(".open-bag").addEventListener("click", () => {
-    document.querySelector("#bag-section").classList.toggle("bag");
+    // Toggle the hidden class and update the state on the server
+    document.getElementById("bag-section").classList.toggle("bag");
     document.querySelector(".open-bag").classList.toggle("opened-bag");
+    // Send an asynchronous request to the server to update the state
+    fetch("/toggleState", { method: "POST" });
   });
 
   // EDIT SWITCHES

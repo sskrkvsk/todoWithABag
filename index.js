@@ -25,24 +25,14 @@ try {
   console.error("Error connecting to the database:", error);
 }
 
-let items = [
-  { id: 1, title: "Test title"},
-  { id: 2, title: "Test title 2"},
-  { id: 3, title: "Test title 3"}
-];
-
-let items2 = [
-  { id: 1, title: "Test title"},
-  { id: 2, title: "Test title 2"},
-  { id: 3, title: "Test title 3"}
-];
-
 // GET
 app.get("/", async (req, res) => {
   try {
     const result = await db.query("SELECT * FROM donow ORDER BY id");
-    // let items = result.rows;
-    console.log(result.rows);
+    let items = result.rows;
+
+    const bagResult = await db.query("SELECT * FROM bag ORDER BY id");
+    let items2 = bagResult.rows;
 
     res.render("index.ejs", {
       listItems: items,

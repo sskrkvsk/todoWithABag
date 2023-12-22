@@ -1,7 +1,7 @@
 <%- include('partials/header.ejs'); -%>
 
 <div class="container">
-  <!-- Do now -->
+  <!-- Do now FORM ////////////////////////////////////////////////////////////////////////////// -->
   <section class="donow">
     <p class="alert">added</p>
     <h3>DO THIS</h3>
@@ -16,37 +16,50 @@
       />
       <button type="submit" class="add-btn" name="list" value>+</button>
     </form>
+    <!-- SINGLE ITEM LOOP //////////////////////////////////////////////////////////////////////// -->
+    <% for(let item of listItems){%>
+    <form action="/delete" class="items-form" method="post">
+      <div class="items-container">
+        <div class="item">
+          <p class="title" id="title<%=item.id%>"><%= item.title %></p>
+          <!-- HIDEN SWITCH HANDLER -->
+          <button
+            type="button"
+            class="edit-btn"
+            id="edit<%=item.id%>"
+            onclick="handler('<%=item.id%>')"
+          >
+            <span class="material-symbols-outlined"> edit </span>
+          </button>
 
-    <div class="items-container">
-      <form action="/delete" class="items-form" method="post"></form>
-      <div class="item">
-        <p class="title">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci
-          voluptates unde delectus, et cupiditate, obcaecati quam assumenda
-          reiciendis sed, culpa eveniet natus iste quibusdam tempora est aliquam
-          nobis dolore. Expedita.
-        </p>
-        <button class="edit-btn">
-          <span class="material-symbols-outlined"> edit </span>
-        </button>
-        <button class="delete-btn">
-          <span class="material-symbols-outlined"> done </span>
-        </button>
+          <button class="delete-btn" id="delete<%=item.id%>">
+            <span class="material-symbols-outlined"> done </span>
+          </button>
+          <!-- EDIT ROUTE HIDDEN ELEMENTS -->
+          <form class="edit" action="/edit" method="post">
+            <input type="hidden" name="updatedItemId" value="<%= item.id %>" />
+            <input
+              id="input<%=item.id%>"
+              class="title"
+              type="text"
+              name="updatedItemTitle"
+              value="<%= item.title %>"
+              autocomplete="off"
+              autofocus="true"
+              hidden="true"
+            />
+            <button id="done<%=item.id%>" class="done-btn" type="submit" hidden>
+              <span class="material-symbols-outlined"> add_circle </span>
+            </button>
+          </form>
+        </div>
       </div>
-
-      <div class="item">
-        <p class="title">Short test.</p>
-        <button class="edit-btn">
-          <span class="material-symbols-outlined"> edit </span>
-        </button>
-        <button class="delete-btn">
-          <span class="material-symbols-outlined"> done </span>
-        </button>
-      </div>
-    </div>
+    </form>
+    <% } %>
+    <!-- //////////////////////////////////////////////////////////////////////////////////////////// -->
   </section>
 
-  <button class="open-bag">a</button>
+  <button class="open-bag"></button>
 
   <!--  Bag -->
   <section class="bag" id="bag-section">
@@ -66,45 +79,26 @@
 
     <div class="items-container items-container-bag">
       <form action="/delete" class="items-form" method="post"></form>
-      <div class="item">
-        <p class="title">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci
-          voluptates unde delectus, et cupiditate, obcaecati quam assumenda
-          reiciendis sed, culpa eveniet natus iste quibusdam tempora est aliquam
-          nobis dolore. Expedita.
-        </p>
-        <button class="left-btn">
-          <span class="material-symbols-outlined"> arrow_back </span>
-        </button>
-        <button class="edit-btn">
-          <span class="material-symbols-outlined"> edit </span>
-        </button>
-        <button class="delete-btn">
-          <span class="material-symbols-outlined"> done </span>
-        </button>
-      </div>
-
-      <div class="item">
-        <p class="title">Short test.</p>
-        <button class="left-btn">
-          <span class="material-symbols-outlined"> arrow_back </span>
-        </button>
-        <button class="edit-btn">
-          <span class="material-symbols-outlined"> edit </span>
-        </button>
-        <button class="delete-btn">
-          <span class="material-symbols-outlined"> done </span>
-        </button>
-      </div>
     </div>
   </section>
 </div>
 
 <script>
+  // BAG TOGGLE
   document.querySelector(".open-bag").addEventListener("click", () => {
-    // This function will be executed when the button is clicked
     document.querySelector("#bag-section").classList.toggle("bag");
     document.querySelector(".open-bag").classList.toggle("opened-bag");
   });
+
+  // EDIT SWITCH
+
+  function handler(id) {
+    document.getElementById("title" + id).setAttribute("hidden", true);
+    document.getElementById("edit" + id).setAttribute("hidden", true);
+    document.getElementById("delete" + id).setAttribute("hidden", true);
+
+    document.getElementById("done" + id).removeAttribute("hidden");
+    document.getElementById("input" + id).removeAttribute("hidden");
+  }
 </script>
 <%- include('partials/footer.ejs'); -%>

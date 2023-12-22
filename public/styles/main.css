@@ -212,6 +212,20 @@ h3 {
     font-size: 0.9rem;
 }
 
+.done-btn {
+    width: 15%;
+    border: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.done-btn:hover {
+    background-color: var(--alert-green);
+}
+
+.done-btn:active {
+    background-color: var(--secondary-color);
+}
 /* Bag /////////////////////////////////////////////////////////////////////////*/
 
 .donow {

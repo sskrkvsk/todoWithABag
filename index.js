@@ -25,6 +25,12 @@ try {
   console.error("Error connecting to the database:", error);
 }
 
+let items = [
+  { id: 1, title: "Test title"},
+  { id: 2, title: "Test title 2"},
+  { id: 3, title: "Test title 3"}
+];
+
 // GET
 app.get("/", async (req, res) => {
 //   try {
@@ -32,7 +38,7 @@ app.get("/", async (req, res) => {
 //     let items = result.rows;
 
     res.render("index.ejs", {
-      // listItems: items,
+      listItems: items,
     });
 //   } catch (error) {
 //     console.error("Error retrieving items from the database:", error);

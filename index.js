@@ -39,18 +39,19 @@ let items2 = [
 
 // GET
 app.get("/", async (req, res) => {
-//   try {
-//     const result = await db.query("SELECT * FROM items ORDER BY id");
-//     let items = result.rows;
+  try {
+    const result = await db.query("SELECT * FROM donow ORDER BY id");
+    // let items = result.rows;
+    console.log(result.rows);
 
     res.render("index.ejs", {
       listItems: items,
       bagItems: items2
     });
-//   } catch (error) {
-//     console.error("Error retrieving items from the database:", error);
-//     res.status(500).send("Internal Server Error");
-//   }
+  } catch (error) {
+    console.error("Error retrieving items from the database:", error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 // ADD

@@ -8,6 +8,8 @@
     --secondary-color: #f1f5f8;
     --alert-green: #2cee59be;
     --alert-red: #ff4747a2;
+    --edit-orange: #e2a11494;
+    --yellow-color: #fbff00c4;
     --border-radius: 10px;
     --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -40,7 +42,12 @@ a:focus {
     text-decoration: underline;
 }
 
-/* CONTAINER */
+button {
+    cursor: pointer;
+    transition: all 0.3s linear;
+}
+
+/* CONTAINER //////////////////////////////////////////////////////////////////*/
 .container {
     z-index: -2;
     color: #333;
@@ -62,7 +69,7 @@ section {
     border-radius: var(--border-radius);
 }
 
-/* ALERT */
+/* ALERT /////////////////////////////////////////////////////////////////////*/
 
 .alert {
     border-top-right-radius: 10px;
@@ -78,7 +85,7 @@ section {
     background-color: var(--alert-red);
 }
 
-/* Heading */
+/* Heading /////////////////////////////////////////////////////////////////*/
 
 h3 {
     padding: 20px 0;
@@ -86,7 +93,7 @@ h3 {
     font-size: 2rem;
 }
 
-/* Add input */
+/* Add input ///////////////////////////////////////////////////////////// */
 .add-form {
     margin: 0 auto;
     width: 90%;
@@ -109,15 +116,23 @@ h3 {
 
 .add-btn {
     width: 10%;
-    background-color: var(--primary-color);
-    color: #fff;
+    background-color: var(--bag-color);
+    color: #000000;
     font-weight:600;
     font-size: 15px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
 
-/* Items */
+.add-btn:hover {
+    background-color:var(--primary-color);
+}
+
+.add-btn:active {
+    background-color: var(--yellow-color);
+}
+
+/* Items ///////////////////////////////////////////////////////////////////////*/
 
 .items-container {
     width: 90%;
@@ -155,13 +170,21 @@ h3 {
     width: 8%;
 }
 
+.edit-btn:hover {
+    background-color: var(--edit-orange);
+}
+
 .delete-btn {
     width: 12%;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
 
-/* Bag */
+.delete-btn:hover {
+    background-color: var(--alert-red);
+}
+
+/* Bag /////////////////////////////////////////////////////////////////////////*/
 
 .donow {
     position: relative;
@@ -188,7 +211,7 @@ h3 {
 }
 
 .open-bag:active {
-    background-color: #fbff00c4;
+    background-color: var(--yellow-color);
     box-shadow: var(--yellow-shadow);
 }
 

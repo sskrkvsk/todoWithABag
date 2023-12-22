@@ -61,10 +61,11 @@
 
   <button class="open-bag"></button>
 
-  <!--  Bag -->
+  <!--  BAG -->
   <section class="bag" id="bag-section">
     <p class="alert">added</p>
     <h3>YOUR BAG</h3>
+    <!-- Do later FORM ////////////////////////////////////////////////////////////////////////////// -->
     <form class="add-form" action="add" method="post">
       <input
         name="newItem"
@@ -78,7 +79,58 @@
     </form>
 
     <div class="items-container items-container-bag">
-      <form action="/delete" class="items-form" method="post"></form>
+      <% for(let item of bagItems){%>
+      <form action="/delete" class="items-form" method="post">
+        <div class="items-container">
+          <div class="item">
+            <p class="title" id="bag-title<%=item.id%>"><%= item.title %></p>
+            <!-- HIDEN SWITCH HANDLER -->
+            <button type="button" class="left-btn" id="bag-left<%=item.id%>">
+              <span class="material-symbols-outlined"> arrow_back </span>
+            </button>
+
+            <button
+              type="button"
+              class="edit-btn"
+              id="bag-edit<%=item.id%>"
+              onclick="bagHandler('<%=item.id%>')"
+            >
+              <span class="material-symbols-outlined"> edit </span>
+            </button>
+
+            <button class="delete-btn" id="bag-delete<%=item.id%>">
+              <span class="material-symbols-outlined"> done </span>
+            </button>
+            <!-- EDIT ROUTE HIDDEN ELEMENTS -->
+            <form class="edit" action="/edit" method="post">
+              <input
+                type="hidden"
+                name="updatedItemId"
+                value="<%= item.id %>"
+              />
+              <input
+                id="bag-input<%=item.id%>"
+                class="title"
+                type="text"
+                name="updatedItemTitle"
+                value="<%= item.title %>"
+                autocomplete="off"
+                autofocus="true"
+                hidden="true"
+              />
+              <button
+                id="bag-done<%=item.id%>"
+                class="done-btn"
+                type="submit"
+                hidden
+              >
+                <span class="material-symbols-outlined"> add_circle </span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </form>
+      <% } %>
     </div>
   </section>
 </div>
@@ -99,6 +151,16 @@
 
     document.getElementById("done" + id).removeAttribute("hidden");
     document.getElementById("input" + id).removeAttribute("hidden");
+  }
+
+  function bagHandler(id) {
+    document.getElementById("bag-title" + id).setAttribute("hidden", true);
+    document.getElementById("bag-edit" + id).setAttribute("hidden", true);
+    document.getElementById("bag-delete" + id).setAttribute("hidden", true);
+    document.getElementById("bag-left" + id).setAttribute("hidden", true);
+
+    document.getElementById("bag-done" + id).removeAttribute("hidden");
+    document.getElementById("bag-input" + id).removeAttribute("hidden");
   }
 </script>
 <%- include('partials/footer.ejs'); -%>

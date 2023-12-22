@@ -31,6 +31,12 @@ let items = [
   { id: 3, title: "Test title 3"}
 ];
 
+let items2 = [
+  { id: 1, title: "Test title"},
+  { id: 2, title: "Test title 2"},
+  { id: 3, title: "Test title 3"}
+];
+
 // GET
 app.get("/", async (req, res) => {
 //   try {
@@ -39,6 +45,7 @@ app.get("/", async (req, res) => {
 
     res.render("index.ejs", {
       listItems: items,
+      bagItems: items2
     });
 //   } catch (error) {
 //     console.error("Error retrieving items from the database:", error);

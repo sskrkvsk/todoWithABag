@@ -140,15 +140,12 @@ h3 {
 .items-container  {
     width: 90%;
     margin: 0 auto;
-    margin-top: 20px;
-    display: flex;
+    margin-top: 10px;
     margin-bottom: 10px;
+    display: flex;
+    
 }
 
-
-/* .item {
-
-} */
 
 .title {
     width: 100%;
@@ -159,7 +156,7 @@ h3 {
     font-size: 1.2rem;
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
-    padding: 5px;
+    padding: 10px;
     padding-left: 20px;
 }
 
@@ -168,10 +165,14 @@ h3 {
     width: 90%;
 }
 
+#edit-form-bag, #edit-form {
+    margin: 0 auto;
+}
+
 
 .edit-btn, .delete-btn, .left-btn {
     align-self: center;
-    padding: 5px 0;
+    padding: 10px 0;
     font-size: 1.2rem;
     border: none;
 }
@@ -234,6 +235,10 @@ h3 {
 }
 /* Bag /////////////////////////////////////////////////////////////////////////*/
 
+
+/* .edit-title {
+    align-self: center;
+} */
 
 
 .open-bag {

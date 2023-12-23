@@ -29,7 +29,7 @@
       </div>
     </form>
     <!-- EDIT ROUTE HIDDEN ELEMENTS -->
-    <form class="edit" action="/edit" method="post">
+    <form class="edit" id="edit-form" action="/edit" method="post">
       <input type="hidden" name="updatedItemId" value="<%= item.id %>" />
       <input
         id="input<%=item.id%>"
@@ -96,7 +96,7 @@
       </div>
     </form>
     <!-- EDIT ROUTE HIDDEN ELEMENTS -->
-    <form class="edit" id="edit-form" action="/edit" method="post">
+    <form class="edit" id="edit-form-bag" action="/edit" method="post">
       <input type="hidden" name="updatedBagItemId" value="<%= item.id %>" />
       <input
         id="bag-input<%=item.id%>"

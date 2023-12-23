@@ -6,6 +6,8 @@ import 'dotenv/config';
 const app = express();
 const port = process.env.PORT || 3000;
 let settings = false;
+let message = "";
+let bagMessage = "";
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -42,7 +44,11 @@ app.get("/", async (req, res) => {
       settingsState :settings,
       listItems: items,
       bagItems: items2, 
+      alert: message,
+      bagAlert: bagMessage
     });
+    message = "";
+    bagMessage = "";
   } catch (error) {
     console.error("Error retrieving items from the database:", error);
     res.status(500).send("Internal Server Error");
@@ -52,6 +58,7 @@ app.get("/", async (req, res) => {
 // ADD
 app.post("/add", async (req, res) => {
   try {
+    
     const item = req.body.newItem;
     const item2 = req.body.newBagItem;
 
@@ -62,7 +69,10 @@ app.post("/add", async (req, res) => {
         const bagResult = await db.query("INSERT INTO bag (title) VALUES ($1) RETURNING *", [item2]);
       }
     }
+    if (item) {message = "added";}
+    if (item2) {bagMessage ="added";}
     
+     
     res.redirect("/");
   } catch (error) {
     console.error("Error adding item to the database:", error);
@@ -106,6 +116,8 @@ app.post("/edit", async (req, res) => {
     const result = await db.query("UPDATE donow SET title = $1 WHERE id = $2 RETURNING *", [newValue, itemId]);
     const bagResult = await db.query("UPDATE bag SET title = $1 WHERE id = $2 RETURNING *", [bagNewValue, bagItemId]);
 
+    message = "edited";
+    bagMessage ="edited";
     res.redirect("/");
   } catch (error) {
     console.error("Error updating item in the database:", error);
@@ -124,6 +136,8 @@ app.post("/delete", async (req, res) => {
 
     const bagResult = await db.query("DELETE FROM bag WHERE id = $1 RETURNING *", [deleteBagId]);
 
+    message = "done";
+    bagMessage ="done";
     res.redirect("/");
   } catch (error) {
     console.error("Error deleting item from the database:", error);

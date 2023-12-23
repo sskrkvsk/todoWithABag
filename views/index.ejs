@@ -3,7 +3,9 @@
 <div class="container">
   <!-- Do now FORM ////////////////////////////////////////////////////////////////////////////// -->
   <section class="donow">
-    <p class="alert">added</p>
+    <% if (alert) { %>
+    <p class="alert" id="alertMessage"><%= alert %></p>
+    <% } %>
     <h3>DO THIS</h3>
     <form class="add-form" action="add" method="post">
       <input
@@ -12,7 +14,6 @@
         class="input"
         placeholder="Do what?"
         autocomplete="off"
-        autofocus="true"
       />
       <button type="submit" class="add-btn" name="list" value>+</button>
     </form>
@@ -64,7 +65,9 @@
   <!--  BAG -->
   <% if (settingsState) { %>
   <section class="bag" id="bag-section">
-    <p class="alert">added</p>
+    <% if (bagAlert) { %>
+    <p class="alert" id="bagMessage"><%= bagAlert %></p>
+    <% } %>
     <h3>YOUR BAG</h3>
     <!-- Do later FORM ////////////////////////////////////////////////////////////////////////////// -->
     <form class="add-form" action="add" method="post">
@@ -147,6 +150,20 @@
 
     document.getElementById("bag-done" + id).removeAttribute("hidden");
     document.getElementById("bag-input" + id).removeAttribute("hidden");
+  }
+
+  const alertMessage = document.getElementById("alertMessage");
+  if (alertMessage.innerText.trim() !== "") {
+    setTimeout(() => {
+      alertMessage.innerText = "";
+    }, 1000);
+  }
+
+  const bagAlertMessage = document.getElementById("bagMessage");
+  if (bagAlertMessage.innerText.trim() !== "") {
+    setTimeout(() => {
+      bagAlertMessage.innerText = "";
+    }, 1000);
   }
 </script>
 <%- include('partials/footer.ejs'); -%>

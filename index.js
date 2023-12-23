@@ -5,7 +5,7 @@ import 'dotenv/config';
 
 const app = express();
 const port = process.env.PORT || 3000;
-let isSectionCollapsed = true;
+let settings = false;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -35,10 +35,13 @@ app.get("/", async (req, res) => {
     const bagResult = await db.query("SELECT * FROM bag ORDER BY id");
     let items2 = bagResult.rows;
 
+    const bool = await db.query("SELECT * FROM user_settings");
+    settings = bool.rows[0].state;
+
     res.render("index.ejs", {
+      settingsState :settings,
       listItems: items,
-      bagItems: items2,
-      isSectionCollapsed 
+      bagItems: items2, 
     });
   } catch (error) {
     console.error("Error retrieving items from the database:", error);
@@ -67,10 +70,40 @@ app.post("/add", async (req, res) => {
   }
 });
 
-app.post("/toggleState", (req, res) => {
+app.post("/userSettings", async (req, res) => {
   try {
-    isSectionCollapsed = !isSectionCollapsed;
-    res.status(200).end();
+    // const bool = await db.query("SELECT * FROM user_settings");
+    // let state = bool.rows[0];
+
+    // if (bool.rows.length > 0) {
+    //   settings = state !== settings ? !state : settings;
+    //   console.log(settings);
+    //   const result = await db.query("UPDATE user_settings SET state = $1 RETURNING *", [settings]);
+    //   console.log(result.rows);
+    // } else {
+    //   const set = req.body.settings;
+    //   await db.query("INSERT INTO user_settings (state) VALUES ($1) RETURNING *", [set]);
+    // }
+
+    const bool = await db.query("SELECT * FROM user_settings");
+
+    if (bool.rows.length > 0) {
+      const currentState = bool.rows[0].state;
+      const updatedState = !currentState;
+  
+      // Use the updatedState variable to log or perform other actions as needed
+
+     const result = await db.query("UPDATE user_settings SET state = $1 RETURNING *", [updatedState]);
+} else {
+  const set = Boolean(req.body.settings);
+  await db.query("INSERT INTO user_settings (state) VALUES ($1) RETURNING *", [set]);
+}
+
+
+
+
+    res.redirect("/");
+    // isSectionCollapsed = !isSectionCollapsed;
   } catch (error) {
     console.error("Error toggling section state:", error);
     res.status(500).send("Internal Server Error");

@@ -59,9 +59,13 @@
     <!-- //////////////////////////////////////////////////////////////////////////////////////////// -->
   </section>
 
-  <button class="open-bag"></button>
+  <form action="/userSettings" method="post">
+    <input type="hidden" name="settings" value="<%= settingsState %>" />
+    <button class="open-bag" type="submit"></button>
+  </form>
 
   <!--  BAG -->
+  <% if (settingsState) { %>
   <section class="bag" id="bag-section">
     <p class="alert">added</p>
     <h3>YOUR BAG</h3>
@@ -133,6 +137,7 @@
       <% } %>
     </div>
   </section>
+  <% } %>
 </div>
 
 <script>
@@ -141,14 +146,6 @@
   //   document.querySelector("#bag-section").classList.toggle("bag");
   //   document.querySelector(".open-bag").classList.toggle("opened-bag");
   // });
-
-  document.querySelector(".open-bag").addEventListener("click", () => {
-    // Toggle the hidden class and update the state on the server
-    document.getElementById("bag-section").classList.toggle("bag");
-    document.querySelector(".open-bag").classList.toggle("opened-bag");
-    // Send an asynchronous request to the server to update the state
-    fetch("/toggleState", { method: "POST" });
-  });
 
   // EDIT SWITCHES
 

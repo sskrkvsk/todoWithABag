@@ -6,7 +6,15 @@
     <p class="alert">added</p>
     <h3>DO THIS</h3>
     <form class="add-form" action="add" method="post">
-      <!-- ... your form content ... -->
+      <input
+        name="newItem"
+        type="text"
+        class="input"
+        placeholder="Do what?"
+        autocomplete="off"
+        autofocus="true"
+      />
+      <button type="submit" class="add-btn" name="list" value>+</button>
     </form>
     <!-- SINGLE ITEM LOOP //////////////////////////////////////////////////////////////////////// -->
     <% for(let item of listItems){%>
@@ -22,8 +30,8 @@
         >
           <span class="material-symbols-outlined"> edit </span>
         </button>
-
-        <button class="delete-btn" id="delete<%=item.id%>">
+        <input type="hidden" name="deleteItemId" value="<%=item.id%>" />
+        <button type="submit" class="delete-btn" id="delete<%=item.id%>">
           <span class="material-symbols-outlined"> done </span>
         </button>
       </div>
@@ -90,6 +98,7 @@
           <span class="material-symbols-outlined"> edit </span>
         </button>
 
+        <input type="hidden" name="deleteBagItemId" value="<%=item.id%>" />
         <button class="delete-btn" id="bag-delete<%=item.id%>">
           <span class="material-symbols-outlined"> done </span>
         </button>

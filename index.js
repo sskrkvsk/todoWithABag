@@ -115,16 +115,20 @@ app.post("/edit", async (req, res) => {
 
 //DELETE
 app.post("/delete", async (req, res) => {
-//   try {
-//     const deleteId = req.body.deleteItemId;
 
-//     const result = await db.query("DELETE FROM items WHERE id = $1 RETURNING *", [deleteId]);
-//     // console.log(result.rows);
-//     res.redirect("/");
-//   } catch (error) {
-//     console.error("Error deleting item from the database:", error);
-//     res.status(500).send("Internal Server Error");
-//   }
+  try {
+    const deleteId = req.body.deleteItemId;
+    const deleteBagId = req.body.deleteBagItemId;
+
+    const result = await db.query("DELETE FROM donow WHERE id = $1 RETURNING *", [deleteId]);
+
+    const bagResult = await db.query("DELETE FROM bag WHERE id = $1 RETURNING *", [deleteBagId]);
+
+    res.redirect("/");
+  } catch (error) {
+    console.error("Error deleting item from the database:", error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 

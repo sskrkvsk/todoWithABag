@@ -141,13 +141,14 @@ h3 {
     width: 90%;
     margin: 0 auto;
     margin-top: 20px;
-}
-
-
-.item {
     display: flex;
     margin-bottom: 10px;
 }
+
+
+/* .item {
+
+} */
 
 .title {
     width: 100%;
@@ -232,6 +233,7 @@ h3 {
     background-color: var(--secondary-color);
 }
 /* Bag /////////////////////////////////////////////////////////////////////////*/
+
 
 
 .open-bag {

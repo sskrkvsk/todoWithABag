@@ -12,22 +12,20 @@
     <% for(let item of listItems){%>
     <form action="/delete" class="items-form" method="post">
       <div class="items-container">
-        <div class="item">
-          <p class="title" id="title<%=item.id%>"><%= item.title %></p>
-          <!-- HIDEN SWITCH HANDLER -->
-          <button
-            type="button"
-            class="edit-btn"
-            id="edit<%=item.id%>"
-            onclick="handler('<%=item.id%>')"
-          >
-            <span class="material-symbols-outlined"> edit </span>
-          </button>
+        <p class="title" id="title<%=item.id%>"><%= item.title %></p>
+        <!-- HIDEN SWITCH HANDLER -->
+        <button
+          type="button"
+          class="edit-btn"
+          id="edit<%=item.id%>"
+          onclick="handler('<%=item.id%>')"
+        >
+          <span class="material-symbols-outlined"> edit </span>
+        </button>
 
-          <button class="delete-btn" id="delete<%=item.id%>">
-            <span class="material-symbols-outlined"> done </span>
-          </button>
-        </div>
+        <button class="delete-btn" id="delete<%=item.id%>">
+          <span class="material-symbols-outlined"> done </span>
+        </button>
       </div>
     </form>
     <!-- EDIT ROUTE HIDDEN ELEMENTS -->
@@ -77,26 +75,24 @@
     <% for(let item of bagItems){%>
     <form action="/delete" class="items-form" method="post">
       <div class="items-container">
-        <div class="item">
-          <p class="title" id="bag-title<%=item.id%>"><%= item.title %></p>
-          <!-- HIDEN SWITCH HANDLER -->
-          <button type="button" class="left-btn" id="bag-left<%=item.id%>">
-            <span class="material-symbols-outlined"> arrow_back </span>
-          </button>
+        <p class="title" id="bag-title<%=item.id%>"><%= item.title %></p>
+        <!-- HIDEN SWITCH HANDLER -->
+        <button type="button" class="left-btn" id="bag-left<%=item.id%>">
+          <span class="material-symbols-outlined"> arrow_back </span>
+        </button>
 
-          <button
-            type="button"
-            class="edit-btn"
-            id="bag-edit<%=item.id%>"
-            onclick="bagHandler('<%=item.id%>')"
-          >
-            <span class="material-symbols-outlined"> edit </span>
-          </button>
+        <button
+          type="button"
+          class="edit-btn"
+          id="bag-edit<%=item.id%>"
+          onclick="bagHandler('<%=item.id%>')"
+        >
+          <span class="material-symbols-outlined"> edit </span>
+        </button>
 
-          <button class="delete-btn" id="bag-delete<%=item.id%>">
-            <span class="material-symbols-outlined"> done </span>
-          </button>
-        </div>
+        <button class="delete-btn" id="bag-delete<%=item.id%>">
+          <span class="material-symbols-outlined"> done </span>
+        </button>
       </div>
     </form>
     <!-- EDIT ROUTE HIDDEN ELEMENTS -->

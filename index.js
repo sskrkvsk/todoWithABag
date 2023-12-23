@@ -70,40 +70,21 @@ app.post("/add", async (req, res) => {
   }
 });
 
+// Collapsing status
 app.post("/userSettings", async (req, res) => {
   try {
-    // const bool = await db.query("SELECT * FROM user_settings");
-    // let state = bool.rows[0];
-
-    // if (bool.rows.length > 0) {
-    //   settings = state !== settings ? !state : settings;
-    //   console.log(settings);
-    //   const result = await db.query("UPDATE user_settings SET state = $1 RETURNING *", [settings]);
-    //   console.log(result.rows);
-    // } else {
-    //   const set = req.body.settings;
-    //   await db.query("INSERT INTO user_settings (state) VALUES ($1) RETURNING *", [set]);
-    // }
-
     const bool = await db.query("SELECT * FROM user_settings");
 
     if (bool.rows.length > 0) {
       const currentState = bool.rows[0].state;
       const updatedState = !currentState;
-  
-      // Use the updatedState variable to log or perform other actions as needed
 
      const result = await db.query("UPDATE user_settings SET state = $1 RETURNING *", [updatedState]);
 } else {
   const set = Boolean(req.body.settings);
   await db.query("INSERT INTO user_settings (state) VALUES ($1) RETURNING *", [set]);
 }
-
-
-
-
     res.redirect("/");
-    // isSectionCollapsed = !isSectionCollapsed;
   } catch (error) {
     console.error("Error toggling section state:", error);
     res.status(500).send("Internal Server Error");
@@ -112,17 +93,24 @@ app.post("/userSettings", async (req, res) => {
 
 //EDIT
 app.post("/edit", async (req, res) => {
-//   try {
-//     const itemId = req.body.updatedItemId;
-//     const newValue = req.body.updatedItemTitle;
+  try {
+    const itemId = req.body.updatedItemId;
+    const newValue = req.body.updatedItemTitle;
 
-//     const result = await db.query("UPDATE items SET title = $1 WHERE id = $2 RETURNING *", [newValue, itemId]);
-//     // console.log(result.rows);
-//     res.redirect("/");
-//   } catch (error) {
-//     console.error("Error updating item in the database:", error);
-//     res.status(500).send("Internal Server Error");
-//   }
+    const bagItemId = req.body.updatedBagItemId;
+    const bagNewValue = req.body.updatedBagItemTitle;
+
+    // console.log("itemId: " + bagItemId + "newValue: " + bagNewValue);
+
+  
+    const result = await db.query("UPDATE donow SET title = $1 WHERE id = $2 RETURNING *", [newValue, itemId]);
+    const bagResult = await db.query("UPDATE bag SET title = $1 WHERE id = $2 RETURNING *", [bagNewValue, bagItemId]);
+
+    res.redirect("/");
+  } catch (error) {
+    console.error("Error updating item in the database:", error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 //DELETE

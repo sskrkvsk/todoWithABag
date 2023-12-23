@@ -35,6 +35,7 @@
           <button class="delete-btn" id="delete<%=item.id%>">
             <span class="material-symbols-outlined"> done </span>
           </button>
+        </form>
           <!-- EDIT ROUTE HIDDEN ELEMENTS -->
           <form class="edit" action="/edit" method="post">
             <input type="hidden" name="updatedItemId" value="<%= item.id %>" />
@@ -54,12 +55,12 @@
           </form>
         </div>
       </div>
-    </form>
+    
     <% } %>
     <!-- //////////////////////////////////////////////////////////////////////////////////////////// -->
   </section>
 
-  <form action="/userSettings" method="post">
+  <form action="/userSettings" method="post" class="bag-form">
     <input type="hidden" name="settings" value="<%= settingsState %>" />
     <button class="open-bag" type="submit"></button>
   </form>
@@ -105,18 +106,19 @@
             <button class="delete-btn" id="bag-delete<%=item.id%>">
               <span class="material-symbols-outlined"> done </span>
             </button>
+          </form>
             <!-- EDIT ROUTE HIDDEN ELEMENTS -->
             <form class="edit" action="/edit" method="post">
               <input
                 type="hidden"
-                name="updatedItemId"
+                name="updatedBagItemId"
                 value="<%= item.id %>"
               />
               <input
                 id="bag-input<%=item.id%>"
                 class="title"
                 type="text"
-                name="updatedItemTitle"
+                name="updatedBagItemTitle"
                 value="<%= item.title %>"
                 autocomplete="off"
                 autofocus="true"
@@ -133,7 +135,7 @@
             </form>
           </div>
         </div>
-      </form>
+      
       <% } %>
     </div>
   </section>

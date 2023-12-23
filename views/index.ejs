@@ -6,15 +6,7 @@
     <p class="alert">added</p>
     <h3>DO THIS</h3>
     <form class="add-form" action="add" method="post">
-      <input
-        name="newItem"
-        type="text"
-        class="input"
-        placeholder="Do what?"
-        autocomplete="off"
-        autofocus="true"
-      />
-      <button type="submit" class="add-btn" name="list" value>+</button>
+      <!-- ... your form content ... -->
     </form>
     <!-- SINGLE ITEM LOOP //////////////////////////////////////////////////////////////////////// -->
     <% for(let item of listItems){%>
@@ -35,29 +27,27 @@
           <button class="delete-btn" id="delete<%=item.id%>">
             <span class="material-symbols-outlined"> done </span>
           </button>
-        </form>
-          <!-- EDIT ROUTE HIDDEN ELEMENTS -->
-          <form class="edit" action="/edit" method="post">
-            <input type="hidden" name="updatedItemId" value="<%= item.id %>" />
-            <input
-              id="input<%=item.id%>"
-              class="title"
-              type="text"
-              name="updatedItemTitle"
-              value="<%= item.title %>"
-              autocomplete="off"
-              autofocus="true"
-              hidden="true"
-            />
-            <button id="done<%=item.id%>" class="done-btn" type="submit" hidden>
-              <span class="material-symbols-outlined"> add_circle </span>
-            </button>
-          </form>
         </div>
       </div>
-    
+    </form>
+    <!-- EDIT ROUTE HIDDEN ELEMENTS -->
+    <form class="edit" action="/edit" method="post">
+      <input type="hidden" name="updatedItemId" value="<%= item.id %>" />
+      <input
+        id="input<%=item.id%>"
+        class="title"
+        type="text"
+        name="updatedItemTitle"
+        value="<%= item.title %>"
+        autocomplete="off"
+        autofocus="true"
+        hidden="true"
+      />
+      <button id="done<%=item.id%>" class="done-btn" type="submit" hidden>
+        <span class="material-symbols-outlined"> add_circle </span>
+      </button>
+    </form>
     <% } %>
-    <!-- //////////////////////////////////////////////////////////////////////////////////////////// -->
   </section>
 
   <form action="/userSettings" method="post" class="bag-form">
@@ -83,72 +73,56 @@
       <button type="submit" class="add-btn" name="list" value>+</button>
     </form>
     <!-- SINGLE ITEM LOOP //////////////////////////////////////////////////////////////////////// -->
-    <div class="items-container items-container-bag">
-      <% for(let item of bagItems){%>
-      <form action="/delete" class="items-form" method="post">
-        <div class="items-container">
-          <div class="item">
-            <p class="title" id="bag-title<%=item.id%>"><%= item.title %></p>
-            <!-- HIDEN SWITCH HANDLER -->
-            <button type="button" class="left-btn" id="bag-left<%=item.id%>">
-              <span class="material-symbols-outlined"> arrow_back </span>
-            </button>
 
-            <button
-              type="button"
-              class="edit-btn"
-              id="bag-edit<%=item.id%>"
-              onclick="bagHandler('<%=item.id%>')"
-            >
-              <span class="material-symbols-outlined"> edit </span>
-            </button>
+    <% for(let item of bagItems){%>
+    <form action="/delete" class="items-form" method="post">
+      <div class="items-container">
+        <div class="item">
+          <p class="title" id="bag-title<%=item.id%>"><%= item.title %></p>
+          <!-- HIDEN SWITCH HANDLER -->
+          <button type="button" class="left-btn" id="bag-left<%=item.id%>">
+            <span class="material-symbols-outlined"> arrow_back </span>
+          </button>
 
-            <button class="delete-btn" id="bag-delete<%=item.id%>">
-              <span class="material-symbols-outlined"> done </span>
-            </button>
-          </form>
-            <!-- EDIT ROUTE HIDDEN ELEMENTS -->
-            <form class="edit" action="/edit" method="post">
-              <input
-                type="hidden"
-                name="updatedBagItemId"
-                value="<%= item.id %>"
-              />
-              <input
-                id="bag-input<%=item.id%>"
-                class="title"
-                type="text"
-                name="updatedBagItemTitle"
-                value="<%= item.title %>"
-                autocomplete="off"
-                autofocus="true"
-                hidden="true"
-              />
-              <button
-                id="bag-done<%=item.id%>"
-                class="done-btn"
-                type="submit"
-                hidden
-              >
-                <span class="material-symbols-outlined"> add_circle </span>
-              </button>
-            </form>
-          </div>
+          <button
+            type="button"
+            class="edit-btn"
+            id="bag-edit<%=item.id%>"
+            onclick="bagHandler('<%=item.id%>')"
+          >
+            <span class="material-symbols-outlined"> edit </span>
+          </button>
+
+          <button class="delete-btn" id="bag-delete<%=item.id%>">
+            <span class="material-symbols-outlined"> done </span>
+          </button>
         </div>
-      
-      <% } %>
-    </div>
+      </div>
+    </form>
+    <!-- EDIT ROUTE HIDDEN ELEMENTS -->
+    <form class="edit" id="edit-form" action="/edit" method="post">
+      <input type="hidden" name="updatedBagItemId" value="<%= item.id %>" />
+      <input
+        id="bag-input<%=item.id%>"
+        class="title edit-title"
+        type="text"
+        name="updatedBagItemTitle"
+        value="<%= item.title %>"
+        autocomplete="off"
+        autofocus="true"
+        hidden="true"
+      />
+      <button id="bag-done<%=item.id%>" class="done-btn" type="submit" hidden>
+        <span class="material-symbols-outlined"> add_circle </span>
+      </button>
+    </form>
+
+    <% } %>
   </section>
   <% } %>
 </div>
 
 <script>
-  // BAG TOGGLE
-  // document.querySelector(".open-bag").addEventListener("click", () => {
-  //   document.querySelector("#bag-section").classList.toggle("bag");
-  //   document.querySelector(".open-bag").classList.toggle("opened-bag");
-  // });
-
   // EDIT SWITCHES
 
   function handler(id) {

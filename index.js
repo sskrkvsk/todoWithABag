@@ -69,8 +69,8 @@ app.post("/add", async (req, res) => {
         const bagResult = await db.query("INSERT INTO bag (title) VALUES ($1) RETURNING *", [item2]);
       }
     }
-    if (item) {message = "added";}
-    if (item2) {bagMessage ="added";}
+    if (item) {message = "added";};
+    if (item2) {bagMessage ="added";};
     
      
     res.redirect("/");
@@ -116,8 +116,8 @@ app.post("/edit", async (req, res) => {
     const result = await db.query("UPDATE donow SET title = $1 WHERE id = $2 RETURNING *", [newValue, itemId]);
     const bagResult = await db.query("UPDATE bag SET title = $1 WHERE id = $2 RETURNING *", [bagNewValue, bagItemId]);
 
-    message = "edited";
-    bagMessage ="edited";
+    if (newValue) {message = "edited";}
+    if (bagNewValue) {bagMessage ="edited";}
     res.redirect("/");
   } catch (error) {
     console.error("Error updating item in the database:", error);
@@ -136,8 +136,8 @@ app.post("/delete", async (req, res) => {
 
     const bagResult = await db.query("DELETE FROM bag WHERE id = $1 RETURNING *", [deleteBagId]);
 
-    message = "done";
-    bagMessage ="done";
+    if (deleteId) {message = "done";}
+    if (deleteBagId) {bagMessage ="done";}
     res.redirect("/");
   } catch (error) {
     console.error("Error deleting item from the database:", error);
@@ -151,11 +151,11 @@ app.post("/move", async (req, res) => {
   try {
     const deleteBagId = req.body.deleteBagItemId;
 
-    const result = await db.query("INSERT INTO donow SELECT * FROM bag WHERE id = $1", [deleteBagId]);
+    const result = await db.query("INSERT INTO donow (title) SELECT title FROM bag WHERE id = $1", [deleteBagId]);
 
     const bagResult = await db.query("DELETE FROM bag WHERE id = $1 RETURNING *", [deleteBagId]);
 
-    bagMessage ="moved";
+    if (deleteBagId) {bagMessage ="moved";}
     res.redirect("/");
   } catch (error) {
     console.error("Error deleting item from the database:", error);

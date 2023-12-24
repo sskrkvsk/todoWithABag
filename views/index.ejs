@@ -158,10 +158,12 @@
   }
   // ALERTS
   const alertMessage = document.getElementById("alertMessage");
-  if (alertMessage.innerText.trim() !== "") {
-    setTimeout(() => {
-      alertMessage.innerText = "";
-    }, 1000);
+  if (alertMessage) {
+    if (alertMessage.innerText.trim() !== "") {
+      setTimeout(() => {
+        alertMessage.innerText = "";
+      }, 1000);
+    }
   }
 
   const bagAlertMessage = document.getElementById("bagMessage");

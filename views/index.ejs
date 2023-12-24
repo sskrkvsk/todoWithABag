@@ -3,8 +3,12 @@
 <div class="container">
   <!-- Do now FORM ////////////////////////////////////////////////////////////////////////////// -->
   <section class="donow">
-    <% if (alert) { %>
-    <p class="alert" id="alertMessage"><%= alert %></p>
+    <% if (alert) { if (alert === "added" || alert === "done") { %>
+    <p class="alert alert-green" id="alertMessage"><%= alert %></p>
+    <%} else if (alert === "edited") { %>
+    <p class="alert alert-orange" id="alertMessage"><%= alert %></p>
+    <% }} else {%>
+    <p class="alert" style="color: transparent">invisible magic thing</p>
     <% } %>
     <h3>DO THIS</h3>
     <form class="add-form" action="add" method="post">
@@ -65,8 +69,13 @@
   <!--  BAG -->
   <% if (settingsState) { %>
   <section class="bag" id="bag-section">
-    <% if (bagAlert) { %>
-    <p class="alert" id="bagMessage"><%= bagAlert %></p>
+    <% if (bagAlert) { if (bagAlert === "added" || bagAlert === "done" ||
+    bagAlert === "moved") { %>
+    <p class="alert alert-green" id="bagMessage"><%= bagAlert %></p>
+    <%} else if (bagAlert === "edited") { %>
+    <p class="alert alert-orange" id="bagMessage"><%= bagAlert %></p>
+    <% }} else {%>
+    <p class="alert" style="color: transparent">invisible magic thing</p>
     <% } %>
     <h3>YOUR BAG</h3>
     <!-- Do later FORM ////////////////////////////////////////////////////////////////////////////// -->
@@ -161,7 +170,8 @@
   if (alertMessage) {
     if (alertMessage.innerText.trim() !== "") {
       setTimeout(() => {
-        alertMessage.innerText = "";
+        alertMessage.style.color = "transparent";
+        alertMessage.style.backgroundColor = "transparent";
       }, 1000);
     }
   }
@@ -169,7 +179,8 @@
   const bagAlertMessage = document.getElementById("bagMessage");
   if (bagAlertMessage.innerText.trim() !== "") {
     setTimeout(() => {
-      bagAlertMessage.innerText = "";
+      bagAlertMessage.style.color = "transparent";
+      bagAlertMessage.style.backgroundColor = "transparent";
     }, 1000);
   }
 

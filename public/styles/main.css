@@ -86,6 +86,10 @@ section {
     background-color: var(--alert-red);
 }
 
+.alert-orange {
+    background-color: var(--edit-orange);
+}
+
 /* Heading /////////////////////////////////////////////////////////////////*/
 
 h3 {

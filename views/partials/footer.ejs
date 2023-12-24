@@ -1,6 +1,29 @@
 </main>
-<!-- <footer>Copyright © <%= new Date().getFullYear() %> -->
+<footer>
+    <button class="section-switch" onclick="switchSections()"><span class="material-symbols-outlined">
+        switch_right
+        </span></button>
 </footer>
+
+
+<script>
+    function switchSections() {
+        let bagSection = document.querySelector(".bag");
+        let firstSection = document.querySelector(".donow");
+
+        if (firstSection.style.display === "none"){
+            firstSection.style.display = "block";
+            bagSection.style.display = "none";
+            document.querySelector(".container").style.background = "var(--pink-gradient)";
+        } else {
+            firstSection.style.display = "none";
+            bagSection.style.display = "block";
+            document.querySelector(".container").style.background = "var(--yellow-gradient)";
+
+        }
+    }
+</script>
+
 </body>
 
 </html>

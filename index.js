@@ -47,7 +47,7 @@ app.get("/", async (req, res) => {
       alert: message,
       bagAlert: bagMessage
     });
-    
+
     message = "";
     bagMessage = "";
   } catch (error) {

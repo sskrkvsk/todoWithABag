@@ -84,11 +84,16 @@
     <!-- SINGLE ITEM LOOP //////////////////////////////////////////////////////////////////////// -->
 
     <% for(let item of bagItems){%>
-    <form action="/delete" class="items-form" method="post">
+    <form action="/delete" class="items-form" id="delete-form" method="post">
       <div class="items-container">
         <p class="title" id="bag-title<%=item.id%>"><%= item.title %></p>
         <!-- HIDEN SWITCH HANDLER -->
-        <button type="button" class="left-btn" id="bag-left<%=item.id%>">
+        <button
+          type="button"
+          onclick="leftMoveRoute()"
+          class="left-btn"
+          id="bag-left<%=item.id%>"
+        >
           <span class="material-symbols-outlined"> arrow_back </span>
         </button>
 
@@ -151,7 +156,7 @@
     document.getElementById("bag-done" + id).removeAttribute("hidden");
     document.getElementById("bag-input" + id).removeAttribute("hidden");
   }
-
+  // ALERTS
   const alertMessage = document.getElementById("alertMessage");
   if (alertMessage.innerText.trim() !== "") {
     setTimeout(() => {
@@ -164,6 +169,12 @@
     setTimeout(() => {
       bagAlertMessage.innerText = "";
     }, 1000);
+  }
+
+  // LEFT MOVE
+  function leftMoveRoute() {
+    document.getElementById("delete-form").action = "/move";
+    document.getElementById("delete-form").submit();
   }
 </script>
 <%- include('partials/footer.ejs'); -%>

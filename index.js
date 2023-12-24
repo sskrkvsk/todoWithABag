@@ -145,6 +145,24 @@ app.post("/delete", async (req, res) => {
   }
 });
 
+//MOVE
+app.post("/move", async (req, res) => {
+
+  try {
+    const deleteBagId = req.body.deleteBagItemId;
+
+    const result = await db.query("INSERT INTO donow SELECT * FROM bag WHERE id = $1", [deleteBagId]);
+
+    const bagResult = await db.query("DELETE FROM bag WHERE id = $1 RETURNING *", [deleteBagId]);
+
+    bagMessage ="moved";
+    res.redirect("/");
+  } catch (error) {
+    console.error("Error deleting item from the database:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

@@ -99,7 +99,7 @@
         <!-- HIDEN SWITCH HANDLER -->
         <button
           type="button"
-          onclick="leftMoveRoute()"
+          onclick="leftMoveRoute('<%=item.id%>')"
           class="left-btn"
           id="bag-left<%=item.id%>"
         >
@@ -185,8 +185,13 @@
   }
 
   // LEFT MOVE
-  function leftMoveRoute() {
+  function leftMoveRoute(itemId) {
+    // Update the action and the value of the hidden input
     document.getElementById("delete-form").action = "/move";
+    document.getElementById("delete-form").elements["deleteBagItemId"].value =
+      itemId;
+
+    // Submit the form
     document.getElementById("delete-form").submit();
   }
 </script>

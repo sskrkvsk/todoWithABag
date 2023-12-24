@@ -151,6 +151,8 @@ app.post("/move", async (req, res) => {
   try {
     const deleteBagId = req.body.deleteBagItemId;
 
+    console.log(deleteBagId);
+
     const result = await db.query("INSERT INTO donow (title) SELECT title FROM bag WHERE id = $1", [deleteBagId]);
 
     const bagResult = await db.query("DELETE FROM bag WHERE id = $1 RETURNING *", [deleteBagId]);

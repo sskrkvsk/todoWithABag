@@ -78,6 +78,7 @@
     <p class="alert" style="color: transparent">invisible magic thing</p>
     <% } %>
     <h3>YOUR BAG</h3>
+
     <!-- Do later FORM ////////////////////////////////////////////////////////////////////////////// -->
     <form class="add-form" action="add" method="post">
       <input
@@ -121,6 +122,7 @@
         </button>
       </div>
     </form>
+
     <!-- EDIT ROUTE HIDDEN ELEMENTS -->
     <form class="edit" id="edit-form-bag" action="/edit" method="post">
       <input type="hidden" name="updatedBagItemId" value="<%= item.id %>" />
@@ -147,24 +149,32 @@
 <script>
   // EDIT SWITCHES
 
-  function handler(id) {
-    document.getElementById("title" + id).setAttribute("hidden", true);
-    document.getElementById("edit" + id).setAttribute("hidden", true);
-    document.getElementById("delete" + id).setAttribute("hidden", true);
+  function hide(id) {
+    document.getElementById(id).setAttribute("hidden", true);
+  }
+  function show(id) {
+    document.getElementById(id).removeAttribute("hidden");
+  }
 
-    document.getElementById("done" + id).removeAttribute("hidden");
-    document.getElementById("input" + id).removeAttribute("hidden");
+  function handler(id) {
+    hide("title" + id);
+    hide("edit" + id);
+    hide("delete" + id);
+
+    show("done" + id);
+    show("input" + id);
   }
 
   function bagHandler(id) {
-    document.getElementById("bag-title" + id).setAttribute("hidden", true);
-    document.getElementById("bag-edit" + id).setAttribute("hidden", true);
-    document.getElementById("bag-delete" + id).setAttribute("hidden", true);
-    document.getElementById("bag-left" + id).setAttribute("hidden", true);
+    hide("bag-title" + id);
+    hide("bag-edit" + id);
+    hide("bag-delete" + id);
+    hide("bag-left" + id);
 
-    document.getElementById("bag-done" + id).removeAttribute("hidden");
-    document.getElementById("bag-input" + id).removeAttribute("hidden");
+    show("bag-done" + id);
+    show("bag-input" + id);
   }
+
   // ALERTS
   const alertMessage = document.getElementById("alertMessage");
   if (alertMessage) {

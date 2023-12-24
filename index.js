@@ -47,6 +47,7 @@ app.get("/", async (req, res) => {
       alert: message,
       bagAlert: bagMessage
     });
+    
     message = "";
     bagMessage = "";
   } catch (error) {
@@ -58,7 +59,6 @@ app.get("/", async (req, res) => {
 // ADD
 app.post("/add", async (req, res) => {
   try {
-    
     const item = req.body.newItem;
     const item2 = req.body.newBagItem;
 
@@ -69,10 +69,9 @@ app.post("/add", async (req, res) => {
         const bagResult = await db.query("INSERT INTO bag (title) VALUES ($1) RETURNING *", [item2]);
       }
     }
+
     if (item) {message = "added";};
     if (item2) {bagMessage ="added";};
-    
-     
     res.redirect("/");
   } catch (error) {
     console.error("Error adding item to the database:", error);
@@ -109,9 +108,6 @@ app.post("/edit", async (req, res) => {
 
     const bagItemId = req.body.updatedBagItemId;
     const bagNewValue = req.body.updatedBagItemTitle;
-
-    // console.log("itemId: " + bagItemId + "newValue: " + bagNewValue);
-
   
     const result = await db.query("UPDATE donow SET title = $1 WHERE id = $2 RETURNING *", [newValue, itemId]);
     const bagResult = await db.query("UPDATE bag SET title = $1 WHERE id = $2 RETURNING *", [bagNewValue, bagItemId]);
@@ -127,7 +123,6 @@ app.post("/edit", async (req, res) => {
 
 //DELETE
 app.post("/delete", async (req, res) => {
-
   try {
     const deleteId = req.body.deleteItemId;
     const deleteBagId = req.body.deleteBagItemId;
@@ -147,11 +142,8 @@ app.post("/delete", async (req, res) => {
 
 //MOVE
 app.post("/move", async (req, res) => {
-
   try {
     const deleteBagId = req.body.deleteBagItemId;
-
-    console.log(deleteBagId);
 
     const result = await db.query("INSERT INTO donow (title) SELECT title FROM bag WHERE id = $1", [deleteBagId]);
 
@@ -164,7 +156,6 @@ app.post("/move", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
-
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

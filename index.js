@@ -5,7 +5,7 @@ import 'dotenv/config';
 
 const app = express();
 const port = process.env.PORT || 3000;
-let settings = false;
+let settings = true;
 let message = "";
 let bagMessage = "";
 

@@ -98,23 +98,25 @@
       <div class="items-container">
         <p class="title" id="bag-title<%=item.id%>"><%= item.title %></p>
         <!-- HIDEN SWITCH HANDLER -->
-        <button
-          type="button"
-          onclick="leftMoveRoute('<%=item.id%>')"
-          class="left-btn"
-          id="bag-left<%=item.id%>"
-        >
-          <span class="material-symbols-outlined"> arrow_back </span>
-        </button>
+        <div class="left-btns">
+          <button
+            type="button"
+            onclick="leftMoveRoute('<%=item.id%>')"
+            class="left-btn bag-left-btn"
+            id="bag-left<%=item.id%>"
+          >
+            <span class="material-symbols-outlined"> arrow_back </span>
+          </button>
 
-        <button
-          type="button"
-          class="edit-btn"
-          id="bag-edit<%=item.id%>"
-          onclick="bagHandler('<%=item.id%>')"
-        >
-          <span class="material-symbols-outlined"> edit </span>
-        </button>
+          <button
+            type="button"
+            class="edit-btn bag-edit-btn"
+            id="bag-edit<%=item.id%>"
+            onclick="bagHandler('<%=item.id%>')"
+          >
+            <span class="material-symbols-outlined"> edit </span>
+          </button>
+        </div>
 
         <input type="hidden" name="deleteBagItemId" value="<%=item.id%>" />
         <button class="delete-btn" id="bag-delete<%=item.id%>">

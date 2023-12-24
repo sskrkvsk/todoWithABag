@@ -58,7 +58,7 @@ button {
     box-shadow: var(--light-shadow);
     display: flex;
     justify-content: space-evenly;
-    min-height: 100vh;
+    min-height: 95vh;
 }
 
 section {
@@ -135,6 +135,7 @@ h3 {
 
 .add-btn:hover {
     background-color:var(--primary-color);
+    color: #000000;
 }
 
 .add-btn:active {
@@ -151,7 +152,6 @@ h3 {
     margin-top: 10px;
     margin-bottom: 10px;
     display: flex;
-    
 }
 
 
@@ -177,6 +177,11 @@ h3 {
     margin: 0 auto;
 }
 
+.left-btns {
+    display: flex;
+    width: 12%;
+}
+
 
 .edit-btn, .delete-btn, .left-btn {
     align-self: center;
@@ -185,8 +190,16 @@ h3 {
     border: none;
 }
 
-.edit-btn, .left-btn {
-    width: 8%;
+.edit-btn{
+    width: 10%;
+}
+
+.bag-edit-btn {
+    width:50%
+}
+
+.left-btn {
+    width: 50%;
 }
 
 .edit-btn:hover {
@@ -200,7 +213,7 @@ h3 {
 }
 
 .delete-btn {
-    width: 12%;
+    width: 10%;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
@@ -314,6 +327,10 @@ footer {
         min-height: 95vh;
     }
 
+    .items-container {
+        height: f;
+    }
+
     section {
         background-color: #ffffff;
         width: 100%;
@@ -323,8 +340,67 @@ footer {
         margin: 20px auto;
     }
 
+    .material-symbols-outlined {
+        color: #a7a7a7;
+    }
+
+    .material-symbols-outlined:hover {
+        color: #000000;
+    }
+
+    .switch {
+        color: #3f3f3f;
+    }
+
+    .switch:hover {
+        color: #000000;
+    }
+
     .bag {
         display: none;
+    }
+
+    .add-btn {
+        width: 12%;
+        color: #3f3f3f;
+    }
+
+
+    .left-btns {
+        flex-direction: column;
+    }
+
+    .bag-left-btn, .bag-edit-btn {
+        width: 100%;
+    }
+
+    .edit-btn {
+        order: 1;
+        border-top-left-radius: var(--border-radius);
+        border-bottom-left-radius: var(--border-radius);
+    }
+
+    .bag-left-btn {
+        border-top-left-radius: var(--border-radius);
+    }
+
+    .bag-edit-btn {
+        border-top-left-radius: 0;
+    }
+    
+    .title {
+        font-size: 1.1rem;
+        letter-spacing: .5px;
+        order: 2;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .delete-btn {
+        order: 3;
+    }
+
+    .done-btn {
+        order:4;
     }
 }
 @media (min-width: 1400px) {

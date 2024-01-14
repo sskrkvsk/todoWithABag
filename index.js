@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
+import cors from "cors";
 import 'dotenv/config';
 
 const app = express();
@@ -11,6 +12,7 @@ let bagMessage = "";
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(cors());
 
 // DB Connection
 const db = new pg.Pool({
@@ -19,6 +21,7 @@ const db = new pg.Pool({
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT || 5432,
+  // ssl: true,
 });
 
 try {
